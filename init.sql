@@ -1,0 +1,10 @@
+CREATE DATABASE IF NOT EXISTS my_database;
+
+USE my_database;
+
+CREATE TABLE IF NOT EXISTS blog_posts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    date DATE NOT NULL,
+    text TEXT NOT NULL
+);

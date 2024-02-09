@@ -1,0 +1,37 @@
+<%- include("partials/header.ejs") %>
+
+
+
+
+    <main class="main-content">
+        <section class="section">
+            <h2 class="section-title">Latest Updates</h2>
+            <% for(let i=0;i<entries.length;i++){ %>
+                <div class="blog-post">
+                    <h3 class="blog-title">
+                        <%= entries[i].title %>
+                    </h3>
+                    <p class="blog-date">
+                        <%= entries[i].date %>
+                    </p>
+                    <p class="blog-content">
+                        <%= entries[i].text %>
+                    </p>
+                </div>
+                <%}%>
+                    <!-- <div class="blog-post">
+                <h3 class="blog-title">Another Blog Post</h3>
+                <p class="blog-date">January 2, 2024</p>
+                <p class="blog-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.
+                    Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.</p>
+            </div> -->
+                    <!-- Add more blog posts here -->
+        </section>
+    </main>
+
+
+
+
+
+
+    <%- include("partials/footer.ejs") %>

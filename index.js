@@ -16,9 +16,9 @@ app.use(express.static("public"));
 
 const mysqlConfig = {
     host: "mysql_server",
-    user: "rahul",
-    password: "secret",
-    database: "test_db"
+    user: "user name u gave in docker-compose.yml file",
+    password: "password u gave in docker-compose.yml file",
+    database: "database name u gave in docker-compose.yml file"
 }
 
 let db = null;

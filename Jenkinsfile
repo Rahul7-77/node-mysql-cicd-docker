@@ -27,6 +27,7 @@ pipeline {
                 }
             }
         }
+        // If u have tests you can uncomment the below 'Docker Test' stage and make the to update the test in package.json 
         // stage('Docker Test'){
         //     steps{
         //         script{
@@ -47,14 +48,14 @@ pipeline {
             emailext(
                 subject: "Build Successful: ${currentBuild.fullDisplayName}",
                 body: "Your build succeeded.",
-                to: "rahuldasari7502@gmail.com"
+                to: "youremail@gmail.com"
             )
         }
         failure {
             emailext(
                 subject: "Build Failed: ${currentBuild.fullDisplayName}",
                 body: "Your build failed. Please check the Jenkins console output for details.",
-                to: "rahuldasari7502@gmail.com"
+                to: "youremail@gmail.com"
             )
         }
     }

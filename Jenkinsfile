@@ -42,4 +42,20 @@ pipeline {
             }
         }
     }
+    post {
+        success {
+            emailext(
+                subject: "Build Successful: ${currentBuild.fullDisplayName}",
+                body: "Your build succeeded.",
+                to: "rahuldasari7502@gmail.com"
+            )
+        }
+        failure {
+            emailext(
+                subject: "Build Failed: ${currentBuild.fullDisplayName}",
+                body: "Your build failed. Please check the Jenkins console output for details.",
+                to: "rahuldasari7502@gmail.com"
+            )
+        }
+    }
 }

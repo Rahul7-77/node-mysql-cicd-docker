@@ -56,6 +56,12 @@ pipeline {
                 }
             }
         }
+        // this step is to access the site from webBrowser when using minikube
+        stage('Accessing site from webBrowser'){
+            steps{
+                sh 'minikube service announce-service'
+            }
+        }
     }
     post {
         success {

@@ -15,11 +15,12 @@ app.use(session({
 app.use(express.static("public"));
 
 const mysqlConfig = {
-    host: "mysql_server",
-    user: "user name u gave in docker-compose.yml file",
-    password: "password u gave in docker-compose.yml file",
-    database: "database name u gave in docker-compose.yml file"
-}
+    host: process.env.MYSQL_HOST,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    database: process.env.MYSQL_DATABASE
+};
+
 
 let db = null;
 

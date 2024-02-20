@@ -1,3 +1,11 @@
+library identifier:'jenkins-shared-library@main',retriever:modernSCM(
+    [
+        $class : 'GitSCMSource',
+        remote: 'https://github.com/Rahul7-77/jenkins-shared-library.git'
+    ]
+)
+
+def gv
 pipeline {
     agent any
     tools{
@@ -11,34 +19,40 @@ pipeline {
         }
         stage('Compile'){
             steps{
-                sh "npm install"
+                script{
+                    npmBuild()
+                }
             }
         }
         stage('OWASP Scan'){
             steps{
-                dependencyCheck additionalArguments: '--scan ./ ', odcInstallation: 'DP'
-                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+                script{
+                    owaspscan.call()
+                }
             }
         }
         stage('Docker build'){
             steps{
                 script{
-                    sh 'docker-compose build'
+                    buildImage 'rahul7502/announcement-node-app'
                 }
             }
         }
-        // If u have tests you can uncomment the below 'Docker Test' stage and make the to update the test in package.json 
-        // stage('Docker Test'){
-        //     steps{
-        //         script{
-        //             sh 'docker-compose run --rm app npm test'
-        //         }
-        //     }
-        // }
-        stage('Docker Deploy'){
+        stage('Docker login and push'){
             steps{
                 script{
-                    sh 'docker-compose up -d --build'
+                    dockerLogin 'docker-creds'
+                    dockerPush 'rahul7502/announcement-node-app'
+                }
+            }
+        }
+        stage('kubernetes deploy'){
+            steps{
+                script{
+                    k8Apply 'mysql-secret'
+                    k8Apply 'mysql'
+                    k8Apply 'announce-configmap'
+                    k8Apply 'announce-app'
                 }
             }
         }

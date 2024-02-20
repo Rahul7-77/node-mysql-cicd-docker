@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: announce-app
+  labels:
+    app: announce-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: announce-app
+  template:
+    metadata:
+      labels:
+        app: announce-app
+    spec: 
+      containers:
+      - name: announce-app
+        image: rahul7502/announcement-node-app:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: MYSQL_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: announce-configmap
+              key: url  
+        - name: MYSQL_USER
+          value: root
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: root_password
+        - name: MYSQL_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: database
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: announce-service
+spec:
+  selector:
+    app: announce-app
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
+    nodePort: 30001

@@ -13,7 +13,7 @@ services:
   mysql_server:
     image: mysql:8.0
     environment:
-      - MYSQL_DATABASE="admin"
+      - MYSQL_DATABASE="mydb"
       - MYSQL_USER="root"
       - MYSQL_PASSWORD="admin"
       - MYSQL_ROOT_PASSWORD="my-secret-pw"

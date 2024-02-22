@@ -16,4 +16,4 @@ services:
       - MYSQL_DATABASE=mydb
       - MYSQL_USER=root
       - MYSQL_PASSWORD=my-secret-pw
-      - MYSQL_ROOT_PASSWORD=my-secret-pw
+      - MYSQL_HOST=mysql_server

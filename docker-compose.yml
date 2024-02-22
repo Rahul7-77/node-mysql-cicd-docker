@@ -14,6 +14,6 @@ services:
     image: mysql:8.0
     environment:
       - MYSQL_DATABASE="your db name"
-      - MYSQL_USER="your_name here"
+      - MYSQL_USER="root"
       - MYSQL_PASSWORD="your password"
       - MYSQL_ROOT_PASSWORD="your password"

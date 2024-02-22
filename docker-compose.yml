@@ -4,6 +4,11 @@ services:
     build: .
     ports:
       - 3000:3000
+    environment:
+    - MYSQL_HOST=mysql_server
+    - MYSQL_USER=rahul
+    - MYSQL_PASSWORD=my-secret-pw
+    - MYSQL_DATABASE=mydb
     volumes:
       - .:/app
       - '/app/node_modules'
